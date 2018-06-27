@@ -738,10 +738,10 @@ class AdminController extends Controller
         }
         
         
-       /*以今天为间隔统计前15天，后15天不统计 小时只要把15改成12 30改成24
+       /*以今天为间隔统计前15天，后15天不统计 小时只要把15改成12 getDayArray改成getHourArray，以及各种细节修改
         $nodeTrafficDaily = SsNodeTrafficDaily::query()->with(['info'])->where('node_id', $node->id)->where('created_at', '>=', date('Y-m-d',strtotime('-15 day')))->orderBy('created_at', 'asc')->pluck('total')->toArray();
         $nodeTrafficDailyTime = SsNodeTrafficDaily::query()->with(['info'])->where('node_id', $node->id)->where('created_at', '>=', date('Y-m-d',strtotime('-15 day')))->orderBy('created_at', 'asc')->pluck('created_at')->toArray();
-        $Daylist = this->getMuchArray(15);
+        $Daylist = this->getDayArray();
         $dailyData = [];
         for($x=0; $x<15; $x++){
             for($y=0; $y<count($nodeTrafficDailyTime); $y++){
