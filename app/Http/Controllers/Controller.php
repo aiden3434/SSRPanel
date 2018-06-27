@@ -119,7 +119,28 @@ class Controller extends BaseController
 
         return $port;
     }
-
+    
+    //获取前后十五天的数组
+    public function getDayArray()
+    {
+        $LastMonthday = date('t',strtotime('-1 month'));
+        $NextMonthday = date('t',strtotime('+1 month'));
+        $ThisMonthday = date('t',time());
+        $NowMonthday = date('d',time());
+        for($x=0; $x<30; $x++){
+            $Daylist[$x] = $NowMonthday - 15 + $x;
+            if($Daylist[$x] > $ThisMonthday){
+                $Daylist[$x] = $Daylist[$x] - $ThisMonthday;
+            }
+            elseif($Day < 0){
+                $Daylist[$x] = $Daylist[$x] + $LastMonthday;
+                if($Daylist[$x] > $NextMonthday){
+                    $Daylist[$x] = $Daylist[$x] - $NextMonthday;
+                }
+            }
+        }
+        reurun $Daylist;
+    }
     // 类似Linux中的tail命令
     public function tail($file, $n, $base = 5)
     {
