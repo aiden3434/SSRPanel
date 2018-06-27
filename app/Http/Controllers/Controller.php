@@ -139,7 +139,7 @@ class Controller extends BaseController
                 }
             }
         }
-        reurun $Daylist;
+        return $Daylist;
     }
     // 类似Linux中的tail命令
     public function tail($file, $n, $base = 5)
