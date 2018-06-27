@@ -132,7 +132,7 @@ class Controller extends BaseController
             if($Daylist[$x] > $ThisMonthday){
                 $Daylist[$x] = $Daylist[$x] - $ThisMonthday;
             }
-            elseif($Day < 0){
+            elseif($Daylist[$x] < 0){
                 $Daylist[$x] = $Daylist[$x] + $LastMonthday;
                 if($Daylist[$x] > $NextMonthday){
                     $Daylist[$x] = $Daylist[$x] - $NextMonthday;
@@ -141,6 +141,23 @@ class Controller extends BaseController
         }
         return $Daylist;
     }
+    
+    //获取前后12小时的数组
+    function getHourArray()
+    {
+        $NowHour = date('H',time());
+        for($x=0; $x<24; $x++){
+            $Hourlist[$x] = $NowHour - 12 + $x;
+            if($Hourlist[$x] > 23){
+                $Hourlist[$x] = $Hourlist[$x] - 24;
+            }
+            elseif($Hourlist[$x] < 0){
+                $Hourlist[$x] = $Hourlist[$x] + 24;
+            }
+        }
+        return $Hourlist;
+    }
+    
     // 类似Linux中的tail命令
     public function tail($file, $n, $base = 5)
     {
